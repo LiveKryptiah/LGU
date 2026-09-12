@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Tasks &bull; Government Workflow OS</title>
+  
+  <link rel="stylesheet" href="../assets/css/design-system.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
+</head>
+<body>
+
+<div class="app-shell">
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <!-- Left Sidebar -->
+  <aside class="app-sidebar" id="app-sidebar">
+    <div class="sidebar-header">
+      <a href="dashboard.html" class="sidebar-brand">
+        <div class="brand-emblem">
+          <img src="../assets/images/logo.svg" alt="Republic Emblem">
+        </div>
+        <div class="brand-info">
+          <span class="brand-title">Workflow OS</span>
+          <span class="brand-tagline">Provincial Gov</span>
+        </div>
+      </a>
+      <button type="button" class="sidebar-collapse-btn" id="sidebar-collapse-btn" title="Toggle Sidebar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="9" y1="3" x2="9" y2="21"></line>
+          <path d="m14 9-3 3 3 3"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="sidebar-body">
+      <div class="nav-group">
+        <div class="nav-section-title">Workplace</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="dashboard.html" class="nav-link" title="Dashboard">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="14" width="7" height="7"></rect>
+                  <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+              </span>
+              <span class="nav-label">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="tasks.html" class="nav-link active" title="My Tasks">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+              </span>
+              <span class="nav-label">My Tasks</span>
+              <span class="nav-pill-badge">12</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="office-tasks.html" class="nav-link" title="Office Tasks">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+              </span>
+              <span class="nav-label">Office Tasks</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="calendar.html" class="nav-link" title="Calendar">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </span>
+              <span class="nav-label">Calendar</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-section-title">Organization</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="employees.html" class="nav-link" title="Employees">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                </svg>
+              </span>
+              <span class="nav-label">Employees</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="activity.html" class="nav-link" title="Activity">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+              </span>
+              <span class="nav-label">Activity</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="notifications.html" class="nav-link" title="Notifications">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+              </span>
+              <span class="nav-label">Notifications</span>
+              <span class="nav-pill-badge" style="background-color: var(--color-danger-bg); color: var(--color-danger);">3</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="reports.html" class="nav-link" title="Reports">
+              <span class="nav-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="20" x2="18" y2="10"></line>
+                  <line x1="12" y1="20" x2="12" y2="4"></line>
+                  <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+              </span>
+              <span class="nav-label">Reports</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="settings.html" class="nav-link" title="Settings">
+            <span class="nav-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+            </span>
+            <span class="nav-label">Settings</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="help.html" class="nav-link" title="Help">
+            <span class="nav-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </span>
+            <span class="nav-label">Help</span>
+          </a>
+        </li>
+      </ul>
+
+      <a href="settings.html" class="sidebar-user-card">
+        <div class="user-avatar-initials">JD</div>
+        <div class="user-meta-compact">
+          <span class="user-name-compact">Juan Dela Cruz</span>
+          <span class="user-role-compact">Administrative Officer</span>
+        </div>
+      </a>
+
+      <a href="../login.html?logged_out=1" class="nav-link text-danger" style="color: var(--color-danger);" onclick="AuthService.logout()">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </span>
+        <span class="nav-label">Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <div class="app-main">
+    <header class="app-header">
+      <div class="header-left">
+        <button type="button" class="mobile-nav-toggle" id="mobile-nav-toggle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="header-page-title-group">
+          <h1 class="header-page-title">My Tasks</h1>
+          <span class="header-breadcrumbs">Individual assignments and pending action items</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="header-office-pill">
+          <span>Provincial Assessor's Office</span>
+        </div>
+        <div class="header-user-btn">
+          <div class="user-avatar-sm">JD</div>
+          <div class="user-meta-header" style="text-align: left;">
+            <div class="user-name-header">Juan Dela Cruz</div>
+            <div class="user-role-header">Administrative Officer</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-content">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-6); flex-wrap: wrap; gap: var(--space-4);">
+        <div>
+          <h2 class="typography-heading">My Assigned Tasks</h2>
+          <p class="typography-subtitle">Manage personal administrative tasks, appraisals, and document reviews.</p>
+        </div>
+        <div style="display: flex; gap: var(--space-3);">
+          <button type="button" class="btn btn-secondary">Filter</button>
+          <button type="button" class="btn btn-primary" onclick="alert('Task creation will be enabled in Step 2.')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>New Task</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="empty-state">
+        <div class="empty-state-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+        </div>
+        <h3 class="empty-state-title">No Pending Task Assignments</h3>
+        <p class="empty-state-desc">
+          You have caught up with all individual assignments. Tasks assigned directly to your desk or endorsed from other departments will appear here.
+        </p>
+        <button type="button" class="btn btn-primary" onclick="alert('Task management functionality will be introduced in the upcoming step.')">
+          <span>Create Personal Task</span>
+        </button>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <div class="footer-left">
+        <strong>Government Workflow OS</strong>
+        <span>&bull;</span>
+        <span>Workplace Management System &bull; Republic of the Philippines</span>
+      </div>
+      <div class="footer-right">
+        <span>Provincial Government</span>
+        <span>&bull;</span>
+        <span>v1.0.0 &bull; Step 1 Foundation</span>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="../assets/js/app.js"></script>
+<script src="../assets/js/auth.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 @echo off
-title Government Workflow OS - PHP & MySQL Stack
+title Government Workflow OS - Local Server Launcher
 cd /d "%~dp0"
 
 echo ============================================================
@@ -8,40 +8,39 @@ echo   Philippine Government Workplace Management System
 echo ============================================================
 echo.
 
-set PHP_BIN=php
+:: 1. Check for PHP
 where php >nul 2>nul
-if %errorlevel% neq 0 (
-    if exist "C:\xampp\php\php.exe" (
-        set PHP_BIN=C:\xampp\php\php.exe
-    ) else if exist "C:\laragon\bin\php\current\php.exe" (
-        set PHP_BIN=C:\laragon\bin\php\current\php.exe
-    ) else (
-        echo [!] PHP was not found in system PATH or standard XAMPP/Laragon locations.
-        echo.
-        echo To run with XAMPP:
-        echo   1. Start Apache and MySQL in the XAMPP Control Panel.
-        echo   2. Copy or symlink this folder into your XAMPP htdocs:
-        echo      C:\xampp\htdocs\LGU-OS
-        echo   3. Open your browser to: http://localhost/LGU-OS/install.php
-        echo.
-        echo If using Windows built-in server without PHP in PATH, run:
-        echo   powershell -ExecutionPolicy Bypass -File serve.ps1
-        echo.
-        pause
-        exit /b 0
-    )
+if %errorlevel% equ 0 (
+    echo [*] Starting PHP built-in server on http://localhost:8000 ...
+    start "" "http://localhost:8000/index.php"
+    php -S localhost:8000
+    exit /b 0
 )
 
-echo [OK] Using PHP executable: %PHP_BIN%
-echo [*] Starting local PHP server on http://localhost:8000 ...
-echo [*] Launching application in default web browser...
-echo.
-echo Demo User: juan.delacruz@pgov.ph
-echo Password:  Password123!
-echo.
-echo Press Ctrl+C in this window to stop the server at any time.
-echo ============================================================
-echo.
+if exist "C:\xampp\php\php.exe" (
+    echo [*] Using XAMPP PHP on http://localhost:8000 ...
+    start "" "http://localhost:8000/index.php"
+    "C:\xampp\php\php.exe" -S localhost:8000
+    exit /b 0
+)
 
-start "" "http://localhost:8000/install.php"
-"%PHP_BIN%" -S localhost:8000
+:: 2. Check for Python (Zero-dependency local server)
+where python >nul 2>nul
+if %errorlevel% equ 0 (
+    echo [*] PHP not detected. Starting Python local web server on http://localhost:8000 ...
+    python serve.py
+    exit /b 0
+)
+
+:: 3. Check for PowerShell (.NET HttpListener)
+where powershell >nul 2>nul
+if %errorlevel% equ 0 (
+    echo [*] Starting Windows PowerShell server on http://localhost:3000 ...
+    powershell -ExecutionPolicy Bypass -File serve.ps1
+    exit /b 0
+)
+
+:: 4. Direct Browser Fallback
+echo [*] Launching application directly in default web browser...
+start "" "index.html"
+exit /b 0

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity &bull; Government Workflow OS</title>
+  
+  <link rel="stylesheet" href="../assets/css/design-system.css">
+  <link rel="stylesheet" href="../assets/css/layout.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logo.svg">
+</head>
+<body>
+
+<div class="app-shell">
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <aside class="app-sidebar" id="app-sidebar">
+    <div class="sidebar-header">
+      <a href="dashboard.html" class="sidebar-brand">
+        <div class="brand-emblem"><img src="../assets/images/logo.svg" alt="Republic Emblem"></div>
+        <div class="brand-info"><span class="brand-title">Workflow OS</span><span class="brand-tagline">Provincial Gov</span></div>
+      </a>
+    </div>
+    <div class="sidebar-body">
+      <div class="nav-group">
+        <div class="nav-section-title">Workplace</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="dashboard.html" class="nav-link"><span class="nav-label">Dashboard</span></a></li>
+          <li class="nav-item"><a href="tasks.html" class="nav-link"><span class="nav-label">My Tasks</span><span class="nav-pill-badge">12</span></a></li>
+          <li class="nav-item"><a href="office-tasks.html" class="nav-link"><span class="nav-label">Office Tasks</span></a></li>
+          <li class="nav-item"><a href="calendar.html" class="nav-link"><span class="nav-label">Calendar</span></a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <div class="nav-section-title">Organization</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="employees.html" class="nav-link"><span class="nav-label">Employees</span></a></li>
+          <li class="nav-item"><a href="activity.html" class="nav-link active"><span class="nav-label">Activity</span></a></li>
+          <li class="nav-item"><a href="notifications.html" class="nav-link"><span class="nav-label">Notifications</span><span class="nav-pill-badge" style="background-color: var(--color-danger-bg); color: var(--color-danger);">3</span></a></li>
+          <li class="nav-item"><a href="reports.html" class="nav-link"><span class="nav-label">Reports</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="sidebar-footer">
+      <ul class="nav-list">
+        <li class="nav-item"><a href="settings.html" class="nav-link"><span class="nav-label">Settings</span></a></li>
+        <li class="nav-item"><a href="help.html" class="nav-link"><span class="nav-label">Help</span></a></li>
+      </ul>
+      <a href="../login.html?logged_out=1" class="nav-link text-danger" style="color: var(--color-danger);" onclick="AuthService.logout()">Logout</a>
+    </div>
+  </aside>
+
+  <div class="app-main">
+    <header class="app-header">
+      <div class="header-left">
+        <button type="button" class="mobile-nav-toggle" id="mobile-nav-toggle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="header-page-title-group">
+          <h1 class="header-page-title">Activity</h1>
+          <span class="header-breadcrumbs">Audit trail and administrative event log</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="header-office-pill"><span>Provincial Assessor's Office</span></div>
+      </div>
+    </header>
+
+    <main class="app-content">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-6); flex-wrap: wrap; gap: var(--space-4);">
+        <div>
+          <h2 class="typography-heading">System &amp; Office Activity</h2>
+          <p class="typography-subtitle">Immutable audit trail of transmittals, task completions, and authentication events.</p>
+        </div>
+        <div style="display: flex; gap: var(--space-3);">
+          <button type="button" class="btn btn-secondary">Filter Timeline</button>
+        </div>
+      </div>
+
+      <div class="empty-state">
+        <div class="empty-state-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </div>
+        <h3 class="empty-state-title">No Recent Audit Trail Events</h3>
+        <p class="empty-state-desc">
+          As administrative actions, tax assessment endorsements, and document approvals occur, complete chronological records with timestamps will appear here.
+        </p>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <div class="footer-left"><strong>Government Workflow OS</strong> &bull; Republic of the Philippines</div>
+      <div class="footer-right">v1.0.0 &bull; Step 1 Foundation</div>
+    </footer>
+  </div>
+</div>
+
+<script src="../assets/js/app.js"></script>
+<script src="../assets/js/auth.js"></script>
+</body>
+</html>

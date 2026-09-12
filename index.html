@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Government Workflow OS</title>
+  <link rel="stylesheet" href="assets/css/design-system.css">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+      font-family: var(--font-sans);
+      margin: 0;
+      padding: var(--space-4);
+    }
+    .splash-card {
+      text-align: center;
+      background-color: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      box-shadow: var(--shadow-md);
+      max-width: 400px;
+      width: 100%;
+    }
+    .splash-logo {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto var(--space-4);
+    }
+    .splash-spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid var(--color-border);
+      border-top-color: var(--color-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: var(--space-4) auto 0;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="splash-card">
+    <img src="assets/images/logo.svg" alt="Emblem" class="splash-logo">
+    <h1 class="typography-heading" style="font-size: 1.25rem; margin-bottom: 4px;">Government Workflow OS</h1>
+    <p class="typography-caption" style="color: var(--color-ink-muted);">Provincial Government Workplace</p>
+    <div class="splash-spinner"></div>
+    <noscript>
+      <p style="margin-top: 16px; font-size: 0.875rem;">
+        <a href="login.html" class="btn btn-primary" style="display: inline-block;">Proceed to Login &rarr;</a>
+      </p>
+    </noscript>
+  </div>
+
+  <script src="assets/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Simulate quick check then route
+      setTimeout(() => {
+        if (AuthService.isLoggedIn()) {
+          window.location.replace('pages/dashboard.html');
+        } else {
+          window.location.replace('login.html');
+        }
+      }, 200);
+    });
+  </script>
+</body>
+</html>
