@@ -1,6 +1,6 @@
 -- ============================================================
 -- Government Workflow OS — Database Schema
--- Step 1: Foundation & Application Shell
+-- Step 1 & Step 2: Foundation, Organization & Dashboard Tables
 -- ============================================================
 
 CREATE DATABASE IF NOT EXISTS `government_workflow_os`
@@ -78,6 +78,106 @@ CREATE TABLE `employees` (
     FOREIGN KEY (`office_id`)
     REFERENCES `offices` (`id`)
     ON DELETE RESTRICT
+    ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ------------------------------------------------------------
+-- Table: tasks
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `tasks`;
+CREATE TABLE `tasks` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `organization_id` INT UNSIGNED NOT NULL,
+  `office_id` INT UNSIGNED NULL,
+  `assigned_to` INT UNSIGNED NULL,
+  `created_by` INT UNSIGNED NULL,
+
+  `title` VARCHAR(255) NOT NULL,
+  `description` TEXT NULL,
+
+  `status` ENUM(
+    'pending',
+    'in_progress',
+    'completed',
+    'cancelled'
+  ) NOT NULL DEFAULT 'pending',
+
+  `priority` ENUM(
+    'low',
+    'normal',
+    'high',
+    'urgent'
+  ) NOT NULL DEFAULT 'normal',
+
+  `due_date` DATE NULL,
+
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (`id`),
+  INDEX `idx_tasks_assigned_to` (`assigned_to`),
+  INDEX `idx_tasks_status` (`status`),
+  INDEX `idx_tasks_due_date` (`due_date`),
+  INDEX `idx_tasks_org` (`organization_id`),
+  INDEX `idx_tasks_office` (`office_id`),
+
+  CONSTRAINT `fk_tasks_organization`
+    FOREIGN KEY (`organization_id`)
+    REFERENCES `organizations` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+
+  CONSTRAINT `fk_tasks_office`
+    FOREIGN KEY (`office_id`)
+    REFERENCES `offices` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
+
+  CONSTRAINT `fk_tasks_assigned_to`
+    FOREIGN KEY (`assigned_to`)
+    REFERENCES `employees` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
+
+  CONSTRAINT `fk_tasks_created_by`
+    FOREIGN KEY (`created_by`)
+    REFERENCES `employees` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ------------------------------------------------------------
+-- Table: activity_logs
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `activity_logs`;
+CREATE TABLE `activity_logs` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `organization_id` INT UNSIGNED NOT NULL,
+  `employee_id` INT UNSIGNED NULL,
+
+  `action` VARCHAR(100) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+
+  `entity_type` VARCHAR(50) NULL,
+  `entity_id` INT UNSIGNED NULL,
+
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (`id`),
+  INDEX `idx_activity_employee_id` (`employee_id`),
+  INDEX `idx_activity_created_at` (`created_at`),
+  INDEX `idx_activity_org` (`organization_id`),
+
+  CONSTRAINT `fk_activity_organization`
+    FOREIGN KEY (`organization_id`)
+    REFERENCES `organizations` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+
+  CONSTRAINT `fk_activity_employee`
+    FOREIGN KEY (`employee_id`)
+    REFERENCES `employees` (`id`)
+    ON DELETE SET NULL
     ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

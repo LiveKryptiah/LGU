@@ -207,3 +207,150 @@ function verify_csrf_token($token) {
 function h($string) {
     return htmlspecialchars((string)($string ?? ''), ENT_QUOTES, 'UTF-8');
 }
+
+/**
+ * Escaper alias for template conciseness.
+ *
+ * @param mixed $string
+ * @return string
+ */
+function e($string) {
+    return h($string);
+}
+
+/**
+ * Convert datetime string to human-friendly relative time.
+ * (e.g. "Just now", "10 minutes ago", "2 hours ago", "Yesterday", "Sep 10, 2026")
+ *
+ * @param string|int|null $datetime
+ * @return string
+ */
+function format_relative_time($datetime) {
+    if (empty($datetime)) {
+        return '—';
+    }
+
+    $timestamp = is_numeric($datetime) ? (int)$datetime : strtotime($datetime);
+    if (!$timestamp) {
+        return '—';
+    }
+
+    $now = time();
+    $diff = $now - $timestamp;
+
+    if ($diff < 0) {
+        return 'Just now';
+    }
+
+    if ($diff < 60) {
+        return 'Just now';
+    }
+
+    if ($diff < 3600) {
+        $mins = (int)floor($diff / 60);
+        return $mins . ' ' . ($mins === 1 ? 'minute' : 'minutes') . ' ago';
+    }
+
+    if ($diff < 86400) {
+        $hours = (int)floor($diff / 3600);
+        return $hours . ' ' . ($hours === 1 ? 'hour' : 'hours') . ' ago';
+    }
+
+    if ($diff < 172800) {
+        return 'Yesterday';
+    }
+
+    $days = (int)floor($diff / 86400);
+    if ($days < 7) {
+        return $days . ' days ago';
+    }
+
+    return date('M j, Y', $timestamp);
+}
+
+/**
+ * Computes urgency and relative label for a given due date.
+ *
+ * @param string|null $dueDate YYYY-MM-DD
+ * @param string $status
+ * @return array ['label' => string, 'class' => string, 'is_urgent' => bool]
+ */
+function format_relative_deadline($dueDate, $status = 'pending') {
+    if ($status === 'completed') {
+        return [
+            'label'     => 'Completed',
+            'class'     => 'badge-success',
+            'is_urgent' => false
+        ];
+    }
+
+    if ($status === 'cancelled') {
+        return [
+            'label'     => 'Cancelled',
+            'class'     => 'badge-neutral',
+            'is_urgent' => false
+        ];
+    }
+
+    if (empty($dueDate)) {
+        return [
+            'label'     => 'No deadline',
+            'class'     => 'badge-neutral',
+            'is_urgent' => false
+        ];
+    }
+
+    $todayStr = date('Y-m-d');
+    $dueTimestamp = strtotime($dueDate);
+    $todayTimestamp = strtotime($todayStr);
+
+    if (!$dueTimestamp) {
+        return [
+            'label'     => $dueDate,
+            'class'     => 'badge-neutral',
+            'is_urgent' => false
+        ];
+    }
+
+    $diffDays = (int)round(($dueTimestamp - $todayTimestamp) / 86400);
+
+    if ($diffDays < 0) {
+        $absDays = abs($diffDays);
+        return [
+            'label'     => 'Overdue (' . $absDays . ($absDays === 1 ? 'd' : 'd') . ')',
+            'class'     => 'badge-danger',
+            'is_urgent' => true
+        ];
+    }
+
+    if ($diffDays === 0) {
+        return [
+            'label'     => 'Due today',
+            'class'     => 'badge-warning',
+            'is_urgent' => true
+        ];
+    }
+
+    if ($diffDays === 1) {
+        return [
+            'label'     => 'Due tomorrow',
+            'class'     => 'badge-info',
+            'is_urgent' => false
+        ];
+    }
+
+    if ($diffDays <= 7) {
+        return [
+            'label'     => 'Due in ' . $diffDays . ' days',
+            'class'     => 'badge-neutral',
+            'is_urgent' => false
+        ];
+    }
+
+    return [
+        'label'     => date('M j, Y', $dueTimestamp),
+        'class'     => 'badge-neutral',
+        'is_urgent' => false
+    ];
+}
+

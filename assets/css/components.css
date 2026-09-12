@@ -737,11 +737,34 @@
 }
 
 /* ------------------------------------------------------------
-   RESPONSIVE ADAPTATIONS
+   DASHBOARD WORKSPACE COMPONENTS & RESPONSIVE ADAPTATIONS
    ------------------------------------------------------------ */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.dashboard-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.task-item-row:hover,
+.activity-timeline-item:hover {
+  background-color: var(--color-canvas-subtle);
+}
+
 @media (max-width: 1024px) {
   .stat-card-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .dashboard-grid,
+  .dashboard-split-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -754,4 +777,14 @@
     align-items: flex-start;
     gap: var(--space-2);
   }
+  .task-item-row {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: var(--space-3) !important;
+  }
+  .task-item-meta {
+    width: 100%;
+    justify-content: flex-start !important;
+  }
 }
+

@@ -24,7 +24,7 @@ try {
         $tablesStmt = $testPdo->query("SHOW TABLES");
         if ($tablesStmt) {
             $existingTables = $tablesStmt->fetchAll(PDO::FETCH_COLUMN);
-            if (count($existingTables) >= 3) {
+            if (count($existingTables) >= 5) {
                 $isInstalled = true;
             }
         }
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['run_setup'])) {
         }
         $schemaSql = file_get_contents($schemaPath);
         $pdo->exec($schemaSql);
-        $installLogs[] = "✓ Relational tables created (`organizations`, `offices`, `employees`)";
+        $installLogs[] = "✓ Relational tables established (`organizations`, `offices`, `employees`, `tasks`, `activity_logs`)";
 
         // 5. Execute Seed Data
         $seedPath = __DIR__ . '/database/seed.sql';
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['run_setup'])) {
         }
         $seedSql = file_get_contents($seedPath);
         $pdo->exec($seedSql);
-        $installLogs[] = "✓ Mandated provincial offices established (6 departments)";
+        $installLogs[] = "✓ Seeded provincial offices, personnel, 12 demo tasks, and activity logs";
 
         // 6. Guarantee fresh native PHP password hash for Juan Dela Cruz
         $nativeHash = password_hash('Password123!', PASSWORD_BCRYPT, ['cost' => 10]);
